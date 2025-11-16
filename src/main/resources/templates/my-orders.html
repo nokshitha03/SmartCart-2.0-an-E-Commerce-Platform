@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCart 2.0</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="my-orders.css">
+</head>
+<body>
+	<header>
+		    <nav>
+		        <ul>
+					<li><p style="margin-left: -25px;text-shadow: 0 0 3px rgb(189, 189, 233);color: rgb(4, 4, 99);">SmartCart 2.0</p>
+											<img class="sig" th:src="@{/shopping-bag.png}" alt=""></li>
+
+		            <!-- Home -->
+		            <li><a th:href="@{/}" class="home">Home</a></li>
+
+		            <!-- My Cart -->
+		            <li>
+		                <i class="bi bi-bag-check-fill"></i>
+		                <a th:href="@{/cart}" style="margin-left: 5px;">My Cart</a>
+		            </li>
+
+		            <!-- My Orders -->
+		            <li>
+		                <i class="bi bi-card-list"></i>
+		                <a th:href="@{/my-orders}" style="margin-left: 5px;" class="my-orders">My Orders</a>
+		            </li>
+
+		            <!-- Search -->
+		            <li>
+		                <input type="text" placeholder="search here">
+		                <a href="#" class="search"><i class="bi bi-search"></i></a>
+		            </li>
+
+		            <!-- Wishlist -->
+		            <li>
+		                <i class="bi bi-heart"></i>
+		                <a th:href="@{/wishlist}" style="margin-left: 5px;">Wishlist</a>
+		            </li>
+
+		            <!-- View Profile -->
+		            <li>
+		                <i class="bi bi-person-circle"></i>
+		                <a th:href="@{/profile/view}" style="margin-left: 5px;">View Profile</a>
+		            </li>
+
+		            <!-- Edit Profile -->
+		            <li>
+		                <i class="bi bi-pencil-square"></i>
+		                <a th:href="@{/profile/edit}" style="margin-left: 5px;">Edit Profile</a>
+		            </li>
+
+		            <!-- Logout -->
+		            <li>
+		                <i class="bi bi-box-arrow-right"></i>
+		                <a th:href="@{/logout}" style="margin-left: 5px;">Logout</a>
+		            </li>
+		        </ul>
+		    </nav>
+		</header>
+    <div class="container">
+    <h1>My Orders</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+		<tbody>
+		    <tr th:each="o : ${orders}">
+		        <td data-label="Order ID" th:text="${o.orderId}"></td>
+		        <td data-label="Product Name" th:text="${o.productName}"></td>
+		        <td data-label="Quantity" th:text="${o.quantity}"></td>
+		        <td data-label="Price">₹<span th:text="${o.totalAmount}"></span></td>
+		        <td data-label="Order Date" th:text="${o.orderDate}"></td>
+
+		        <!-- STATUS -->
+		        <td data-label="Status">
+		            <span class="status delivered" th:if="${o.orderStatus == 'Delivered'}">Delivered</span>
+		            <span class="status pending" th:if="${o.orderStatus == 'Pending'}">Pending</span>
+		        </td>
+
+		        <!-- CANCEL BUTTON -->
+		        <td data-label="Action">
+		            <a th:if="${o.orderStatus == 'Pending'}"
+		               th:href="@{'/user/order/cancel/' + ${o.orderId}}">
+
+		                <button class="cancel-btn">Cancel Order</button>
+
+		            </a>
+
+		            <button class="cancel-btn" disabled 
+		                    th:if="${o.orderStatus == 'Delivered'}">
+		                Cancel Order
+		            </button>
+		        </td>
+		    </tr>
+		</tbody>
+
+    </table>
+</div>
+
+<!-- Toast Message -->
+<div id="toast"></div>
+<script>
+// Cancel order and toast logic
+const cancelButtons = document.querySelectorAll(".cancel-btn");
+const toast = document.getElementById("toast");
+
+cancelButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const paymentType = btn.getAttribute("data-payment");
+
+        if (paymentType === "online") {
+            showToast("Your order has been cancelled. Refund will be processed within 2-3 working days.");
+        } else if (paymentType === "cod") {
+            showToast("Your cash on delivery order has been cancelled successfully.");
+        }
+
+        btn.textContent = "Cancelled";
+        btn.disabled = true;
+        btn.style.backgroundColor = "#888";
+    });
+});
+
+function showToast(message) {
+    toast.textContent = message;
+    toast.className = "show";
+    setTimeout(() => toast.className = toast.className.replace("show", ""), 3500);
+}
+</script>
+</body>
+</html>

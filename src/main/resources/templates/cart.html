@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCart 2.0 - Cart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" th:href="@{/cart.css}">
+</head>
+<body>
+
+	<header>
+		    <nav>
+		        <ul>
+		            
+					
+					<li><p style="margin-left: -25px;text-shadow: 0 0 3px rgb(189, 189, 233);color: rgb(4, 4, 99);">SmartCart 2.0</p>
+						<img class="sig" th:src="@{/shopping-bag.png}" alt=""></li>
+
+		            <!-- Home -->
+		            <li><a th:href="@{/}" >Home</a></li>
+
+		            <!-- My Cart -->
+		            <li>
+		                <i class="bi bi-bag-check-fill"></i>
+		                <a th:href="@{/cart}" style="margin-left: 5px;" class="cart">My Cart</a>
+		            </li>
+
+		            <!-- My Orders -->
+		            <li>
+		                <i class="bi bi-card-list"></i>
+		                <a th:href="@{/my-orders}" style="margin-left: 5px;">My Orders</a>
+		            </li>
+
+		            <!-- Search -->
+		            <li>
+		                <input type="text" placeholder="search here">
+		                <a href="#" class="search"><i class="bi bi-search"></i></a>
+		            </li>
+
+		            <!-- Wishlist -->
+		            <li>
+		                <i class="bi bi-heart"></i>
+		                <a th:href="@{/wishlist}" style="margin-left: 5px;">Wishlist</a>
+		            </li>
+
+		            <!-- View Profile -->
+		            <li>
+		                <i class="bi bi-person-circle"></i>
+		                <a th:href="@{/profile/view}" style="margin-left: 5px;">View Profile</a>
+		            </li>
+
+		            <!-- Edit Profile -->
+		            <li>
+		                <i class="bi bi-pencil-square"></i>
+		                <a th:href="@{/profile/edit}" style="margin-left: 5px;">Edit Profile</a>
+		            </li>
+
+		            <!-- Logout -->
+		            <li>
+		                <i class="bi bi-box-arrow-right"></i>
+		                <a th:href="@{/logout}" style="margin-left: 5px;">Logout</a>
+		            </li>
+		        </ul>
+		    </nav>
+		</header>
+
+  <div class="container">
+    <h2>Your Shopping Cart</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- CART ITEMS -->
+        <tr th:each="item : ${cartItems}" th:attr="data-id=${item.id}" class="animate-fade-in">
+          <td th:text="${item.product.name}">Product Name</td>
+          <td th:text="${item.product.price}">0</td>
+          <td>
+            <div class="quantity-control">
+              <span class="minus" style="cursor:pointer;">−</span>
+              <span class="qty-number" th:text="${item.quantity}">1</span>
+              <span class="plus" style="cursor:pointer;">+</span>
+            </div>
+          </td>
+          <td th:text="${item.subtotal}">0</td>
+          <td><a href="#" class="btn btn-danger delete-btn" id="d-btn">Delete</a></td>
+        </tr>
+
+        <!-- IF EMPTY -->
+        <tr th:if="${#lists.isEmpty(cartItems)}">
+          <td colspan="5" style="text-align:center; color: gray;">Your cart is empty!</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- TOTAL SECTION -->
+    <div class="total-section">
+      <h3>Total: <span class="total-amount" th:text="${total}">0</span></h3>
+    </div>
+
+    <div class="text-center mt-3 t-btns">
+      <a href="#" id="c-btn">Clear Cart</a>
+      <a th:href="@{/}" class="btn s-btn">Continue Shopping</a>
+      <a th:href="@{/payment}" class="p-btn" style="background-color: #28a745;">Proceed to Checkout</a>
+    </div>
+  </div>
+
+  <!-- ✅ SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const totalAmountEl = document.querySelector(".total-amount");
+
+      function updateTotal(newTotal) {
+        totalAmountEl.textContent = newTotal.toFixed(2);
+      }
+
+      // Increase quantity
+      document.querySelectorAll(".plus").forEach(btn => {
+        btn.addEventListener("click", function () {
+          const row = this.closest("tr");
+          const cartId = row.dataset.id;
+          const qtyEl = row.querySelector(".qty-number");
+          const price = parseFloat(row.children[1].textContent);
+          let qty = parseInt(qtyEl.textContent) + 1;
+          qtyEl.textContent = qty;
+          row.children[3].textContent = (qty * price).toFixed(2);
+
+          fetch(`/cart/increase/${cartId}`)
+            .then(() => fetch(`/cart`))
+            .then(() => location.reload());
+        });
+      });
+
+      // Decrease quantity
+      document.querySelectorAll(".minus").forEach(btn => {
+        btn.addEventListener("click", function () {
+          const row = this.closest("tr");
+          const cartId = row.dataset.id;
+          const qtyEl = row.querySelector(".qty-number");
+          const price = parseFloat(row.children[1].textContent);
+          let qty = parseInt(qtyEl.textContent);
+
+          if (qty > 1) {
+            qty--;
+            qtyEl.textContent = qty;
+            row.children[3].textContent = (qty * price).toFixed(2);
+            fetch(`/cart/decrease/${cartId}`)
+              .then(() => fetch(`/cart`))
+              .then(() => location.reload());
+          } else {
+            fetch(`/cart/delete/${cartId}`)
+              .then(() => location.reload());
+          }
+        });
+      });
+
+      // Delete single item
+      document.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          const row = this.closest("tr");
+          const cartId = row.dataset.id;
+          fetch(`/cart/delete/${cartId}`)
+            .then(() => location.reload());
+        });
+      });
+
+      // Clear cart
+      document.querySelector("#c-btn").addEventListener("click", function (e) {
+        e.preventDefault();
+        fetch(`/cart/clear`)
+          .then(() => location.reload());
+      });
+    });
+  </script>
+
+</body>
+</html>

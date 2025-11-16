@@ -1,0 +1,206 @@
+body{
+    background: linear-gradient(135deg, rgba(2,0,36,1) 0%, rgba(0,40,85,0.95) 40%, rgba(0,60,120,0.9) 70%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+ 
+}
+
+nav{
+    background-color: white;
+    height: 60px;
+}
+nav ul .sig{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+.my-orders{
+    font-size: 20px;
+    color: rgb(53, 53, 255);
+    border-bottom:2px solid rgb(53, 53, 255);
+}
+nav input{
+    height: 24px;
+    width: 200px;
+    
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-right: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.5s ease;
+}
+header nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+header nav ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+header nav ul li a:hover{
+    font-size: 20px;
+    color: rgb(53, 53, 255);
+    border-bottom:2px solid rgb(53, 53, 255);
+}
+header nav ul li{
+    margin-top: 20px;
+}
+
+.bi-heart{
+    color:rgb(255, 172, 186);
+    font-weight: 900;
+}
+.container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    animation: fadeIn 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    color: #68f7ff;
+    margin-bottom: 25px;
+    text-shadow: 0 0 6px #006a70;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+th {
+    color: #03f2ff;
+    font-size: 17px;
+}
+
+tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: 0.3s ease;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-weight: 550;
+    color: #fff;
+    font-size: 12px;
+}
+
+.status.pending { 
+    background: #f6c23e;
+    
+    
+}
+.status.shipped { background: #19acc9; }
+.status.delivered { background: #00ae6e; }
+
+.cancel-btn {
+    border:2px solid #ff4e4e;
+    color: red;
+    font-weight: 600;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 8px;
+    font-size: 9px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.cancel-btn:hover {
+    background-color: #ff2e2e;
+    transform: scale(1.05);
+    color: white;
+    border: 3px solid #ffffff;
+
+}
+
+
+td{
+    color: white;
+}
+/* Toast */
+#toast {
+    visibility: hidden;
+    min-width: 280px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 14px;
+}
+
+#toast.show {
+    visibility: visible;
+    animation: fadeInOut 3.5s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%,100% { opacity: 0; bottom: 0; }
+    10%,90% { opacity: 1; bottom: 30px; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th { display: none; }
+
+    tr {
+        margin-bottom: 15px;
+        background-color: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    td {
+        text-align: left;
+        padding: 10px 15px;
+        position: relative;
+        color: white
+         
+    }
+
+    td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #68f7ff;
+        display: block;
+        margin-bottom: 4px;
+    }
+}

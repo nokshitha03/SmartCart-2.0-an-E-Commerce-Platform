@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Payment Page</title>
+    <link rel="stylesheet" th:href="@{/payment.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Payment and Shipping Details</h1>
+
+        <!-- FORM WITH THYMELEAF ACTION -->
+        <form id="paymentForm" th:action="@{/processPayment}" method="post">
+
+            <label for="address">Enter Address:</label>
+            <input type="text" id="address" name="address" placeholder="e.g., 123 Main Street" required>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" placeholder="e.g., Telangana" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" placeholder="e.g., Hyderabad" required>
+
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" placeholder="e.g., India" required>
+
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method" name="paymentMethod" onchange="toggleOnlineFields()">
+                <option value="cod">Cash on Delivery (COD)</option>
+                <option value="online">Online Pay</option>
+            </select>
+
+            <div id="onlineFields">
+                <label for="transaction-id">Transaction ID:</label>
+                <input type="text" id="transaction-id" name="transactionId" placeholder="Enter Transaction ID">
+
+                <label for="mobile-number">Mobile Number:</label>
+                <input type="text" id="mobile-number" name="mobileNumber" placeholder="Enter Mobile Number">
+            </div>
+
+            
+            <!--<a th:href="@{/bill}" class="btn" type="submit">Proceed to Generate Bill and Pay</a>-->
+			<button class="btn" type="submit">Proceed to Generate Bill and Pay</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleOnlineFields() {
+            const onlineFields = document.getElementById('onlineFields');
+            const pm = document.getElementById('payment-method').value;
+
+            if (pm === 'online') {
+                onlineFields.classList.add('active');
+            } else {
+                onlineFields.classList.remove('active');
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('onlineFields').classList.remove('active');
+        });
+    </script>
+
+</body>
+</html>

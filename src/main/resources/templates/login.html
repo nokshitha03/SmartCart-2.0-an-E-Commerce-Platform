@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0a0f24;
+            color: #ffffff;
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background: #111c3d;
+            padding: 35px 45px;
+            border-radius: 12px;
+            width: 380px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        /* Top section with image + title */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .header p {
+            font-size: 20px;
+            color: #87a9ff;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #b8c8ff;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 5px;
+            background: #dfe6ff;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #3559e0;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 15px;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #2649c4;
+        }
+
+        .signup-text {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .signup-text a {
+            color: #87a9ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+
+    <!-- Top Image + Title -->
+    <div class="header">
+        <img src="sb2.png" alt="Logo">
+        <p>SmartCart 2.0</p>
+    </div>
+
+    <h3 class="head">Login Form</h3>
+
+    <form th:action="@{/login}" method="post">
+
+        <input type="text" name="username" placeholder="Enter Username" required>
+
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <!-- Signup link -->
+    <div class="signup-text">
+        If not registered,  
+        <a th:href="@{/register}">Sign Up here</a>
+    </div>
+
+</div>
+
+</body>
+</html>

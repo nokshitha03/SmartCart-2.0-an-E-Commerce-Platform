@@ -1,0 +1,122 @@
+/* Dark Theme and General Styling */
+body {
+background: linear-gradient(135deg, rgba(2,0,36,1) 0%, rgba(0,40,85,0.95) 40%, rgba(0,60,120,0.9) 70%);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+animation: fadeIn 0.5s ease forwards;
+}
+
+.container {
+max-width: 800px;
+margin: 20px auto;
+padding: 20px;
+background-color: transparent;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+h1, h2 {
+text-align: center;
+color: #ffffff;
+}
+
+form {
+display: flex;
+flex-direction: column;
+}
+
+label{
+margin-top: 10px;
+font-weight: bold;
+color: white;
+}
+
+input, select {
+    margin:auto;
+width: 80%;
+font-size: 17px;
+padding: 18px;
+margin-top: 5px;
+background-color: #565656;
+color: white;
+border: 2px solid #262626;
+border-radius: 4px;
+transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth focus transition */
+}
+
+input:focus, select:focus {
+border-color: #007bff;
+box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle glow */
+}
+#payment-method {
+width: 85%;
+margin-bottom: 14px;
+}
+
+#onlineFields {
+opacity: 0;
+max-height: 0;
+overflow: hidden;
+transition: opacity 0.5s ease, max-height 0.5s ease; /* Fade and slide for fields */
+}
+
+#onlineFields.active {
+opacity: 1;
+max-height: 200px; /* Adjust based on content */
+animation: fadeIn 0.5s ease forwards;
+}
+#onlineFields input {
+    margin: 5px auto 15px auto; /* same as main inputs */
+    
+    width: 80%; /* match main input width */
+    display: block; /* ensures stacked properly */
+}
+.bill-section {
+margin-top: 20px;
+padding: 15px;
+background-color: #2c2c2c;
+border-radius: 8px;
+display: none;
+animation: fadeIn 0.5s ease forwards; /* Bill animation */
+}
+
+.btn {
+    text-decoration: none;
+text-align: center;
+display: block;
+font-size: 18px;
+width: 40%;
+
+margin: 15px auto 0 auto;
+padding: 10px;
+background-color: #46eede;
+color: black;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+border: 2px solid #262626;
+transition: background-color 0.3s ease, transform 0.3s ease; /* Button hover animation */
+}
+
+.btn:hover {
+    border: 2px solid #262626;
+background-color: #46eede;
+transform: scale(1.05); /* Slight scale effect */
+}
+
+/* Animation for fade-in */
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+.container {
+margin: 10px;
+padding: 10px;
+}
+
+}

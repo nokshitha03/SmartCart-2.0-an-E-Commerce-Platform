@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCart 2.0 - User Profile</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/user.css}" />
+</head>
+<body>
+	<header>
+		    <nav>
+		        <ul>
+					<li><p style="margin-left: 15px;text-shadow: 0 0 3px rgb(189, 189, 233);color: rgb(4, 4, 99);">SmartCart 2.0</p>
+											<img class="sig" th:src="@{/shopping-bag.png}" alt=""></li>
+
+		            <!-- Home -->
+		            <li><a th:href="@{/}" class="home">Home</a></li>
+
+		            <!-- My Cart -->
+		            <li>
+		                <i class="bi bi-bag-check-fill"></i>
+		                <a th:href="@{/cart}" style="margin-left: 5px;">My Cart</a>
+		            </li>
+
+		            <!-- My Orders -->
+		            <li>
+		                <i class="bi bi-card-list"></i>
+		                <a th:href="@{/my-orders}" style="margin-left: 5px;">My Orders</a>
+		            </li>
+
+		            <!-- Search -->
+		            <li>
+		                <input type="text" placeholder="search here">
+		                <a href="#" class="search"><i class="bi bi-search"></i></a>
+		            </li>
+
+		            <!-- Wishlist -->
+		            <li>
+		                <i class="bi bi-heart"></i>
+		                <a th:href="@{/wishlist}" style="margin-left: 5px;">Wishlist</a>
+		            </li>
+
+		            <!-- View Profile -->
+		            <li>
+		                <i class="bi bi-person-circle"></i>
+		                <a th:href="@{/profile/view}" style="margin-left: 5px;" class="view">View Profile</a>
+		            </li>
+
+		            <!-- Edit Profile -->
+		            <li>
+		                <i class="bi bi-pencil-square"></i>
+		                <a th:href="@{/profile/edit}" style="margin-left: 5px;">Edit Profile</a>
+		            </li>
+
+		            <!-- Logout -->
+		            <li>
+		                <i class="bi bi-box-arrow-right"></i>
+		                <a th:href="@{/logout}" style="margin-left: 5px;">Logout</a>
+		            </li>
+		        </ul>
+		    </nav>
+		</header>
+
+    <div class="container">
+        <h1>User Profile</h1>
+        <div class="profile-card">
+            <div class="profile-details">
+                <p><strong>Full Name :</strong>S.Nokshitha</p>
+                <p><strong>Mobile Number :</strong>8752347895</p>
+                <p><strong>Email :</strong>hi@gmail.com</p>
+                <a href="edit-profile.html" class="btn">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

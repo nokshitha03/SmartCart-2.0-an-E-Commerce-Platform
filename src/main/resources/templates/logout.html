@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logged Out</title>
+
+    <!-- Disable back button -->
+    <meta http-equiv="Cache-Control" content="no-store" />
+
+    <style>
+        body {
+            background: #0a1a66; /* Dark Blue Theme */
+            color: white;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .logout-box {
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 18px;
+            width: 80%;
+            max-width: 450px;
+            box-shadow: 0px 5px 40px rgba(0,0,0,0.5);
+            animation: fadeZoom 1.5s ease-out;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 30px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 17px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        @keyframes fadeZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .btn-login {
+            padding: 12px 20px;
+            background: white;
+            color: #0a1a66;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="logout-box">
+        <h1>You’ve Logged Out</h1>
+        <p>You have successfully logged out of your account.</p>
+
+        <a href="/login" class="btn-login">Go to Login</a>
+    </div>
+
+    <script>
+        // Prevent going back
+        if (window.history && window.history.pushState) {
+            window.history.pushState('', null, './');
+            window.onpopstate = function () {
+                window.location.href = '/login';
+            };
+        }
+    </script>
+
+</body>
+</html>

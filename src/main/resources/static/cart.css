@@ -1,0 +1,281 @@
+body{
+    background: linear-gradient(135deg, rgba(2,0,36,1) 0%, rgba(0,40,85,0.95) 40%, rgba(0,60,120,0.9) 70%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+a{
+    text-decoration: none;
+}
+nav{
+    background-color: white;
+    height: 60px;
+}
+nav ul .sig{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+nav input{
+    height: 24px;
+    width: 200px;
+    
+    border-radius: 8px;
+    border: 1px solid black;
+    margin-right: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.5s ease;
+}
+header nav ul{
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+header nav ul li a{
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+header nav ul li a:hover{
+    font-size: 20px;
+    color: rgb(53, 53, 255);
+    border-bottom:2px solid rgb(53, 53, 255);
+}
+header nav ul li{
+    margin-top: 20px;
+}
+
+.bi-heart{
+    color:rgb(255, 172, 186);
+    font-weight: 900;
+}
+.cart{
+    font-size: 20px;
+    color: rgb(53, 53, 255);
+    border-bottom:2px solid rgb(53, 53, 255);
+}
+/* Dark Theme and General Styling */
+
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+h2 {
+    text-align: center;
+    color: #ffffff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* background-color: #1f1f1f; */
+    background-color: transparent;
+    color: white;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #676464;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+
+table th {
+    background-color: #494747;
+    color: #ffffff;
+    text-transform: uppercase;  
+    font-weight: 550;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    
+}
+
+/* Quantity Control Styling */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: rgb(35, 35, 255); */
+    /* border: 1px solid #555; */
+    border-radius: 4px;
+    padding: 5px 10px;
+    width: 100px; /* Fixed width for consistency */
+    font-size: 14px;
+}
+
+.quantity-control span {
+    margin: 0 5px; /* Space between elements */
+}
+/* style="display: inline-block; width: 32px; text-align: center; vertical-align: middle; line-height: 32px; 
+height: 32px; border: 1px solid #ccc; border-radius: 4px; margin: 0 6px;" */
+.minus{
+
+    border: 2px solid white;
+    height: 15px;
+    width: 15px;
+    padding: 2px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    
+    cursor: pointer;
+}
+.plus{
+    border: 2px solid white;
+    height: 15px;
+    width: 15px;
+    padding: 2px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.quantity-control .qty-number {
+    font-weight: bold;
+    width: 20px;
+    font-size: 17px;
+    text-align: center;
+}
+
+/* Animation for fade-in */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    
+    table thead, table tbody, table th, table td, table tr {
+        display: block;
+    }
+    
+    table th, table td {
+        text-align: right;
+        padding: 8px 10px;
+    }
+    
+    .quantity-control {
+        width: 80px; /* Slightly smaller on mobile */
+        font-size: 12px;
+    }
+}
+#d-btn{
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    transition: background-color 0.3s ease;
+}
+#d-btn:hover{
+    background-color: rgb(250, 88, 88);
+}
+.t-btns{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    
+
+}
+#c-btn{
+    background-color: #676464;
+    color: white;
+    border: 3px solid white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    
+    transition: background-color 0.4s ease-in-out;
+}
+#c-btn:hover{
+    background-color: rgb(255, 31, 31);
+    color: white;
+    border: 2px solid white;
+
+
+}
+.s-btn{
+    background-color: white;
+    text-decoration: none;
+    border: 3px solid rgb(14, 27, 73);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    color: black;
+    transition: background-color 0.4s ease-in-out;
+}
+.s-btn:hover{
+    background-color: rgb(53, 53, 255);
+    color: white;
+    border: 2px solid white;
+}
+.p-btn{
+    background-color: #28a745;
+    border: 3px solid white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 17px;
+    color: white;
+    transition: background-color 0.4s ease-in-out;
+}
+.p-btn:hover{
+    background-color: #FFA500 !important;
+    color: black;
+    border: 3px solid white;
+}
+/* TOTAL SECTION */
+.total-section {
+    color: white;
+    text-align: right;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.total-section .total-amount {
+    color: #57ff7e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    .quantity-control {
+        gap: 5px;
+        padding: 4px 8px;
+    }
+
+    .total-section {
+        text-align: center;
+    }
+}
